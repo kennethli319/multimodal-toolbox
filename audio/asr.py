@@ -15,7 +15,7 @@ with open_dict(decoding_cfg):
     asr_model.change_decoding_strategy(decoding_cfg)
 
 # specify flag `return_hypotheses=True``
-hypotheses = asr_model.transcribe(["sample_22050.wav"], return_hypotheses=True)
+hypotheses = asr_model.transcribe(["data/sample_22050.wav"], return_hypotheses=True)
 
 # if hypotheses form a tuple (from RNNT), extract just "best" hypotheses
 if type(hypotheses) == tuple and len(hypotheses) == 2:
