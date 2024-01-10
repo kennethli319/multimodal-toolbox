@@ -5,8 +5,10 @@ models = {}
 
 models['ctc'] = "nvidia/parakeet-ctc-1.1b"
 models['rnnt'] = "nvidia/parakeet-rnnt-1.1b"
+models['ctc-small'] = "nvidia/parakeet-ctc-0.6b"
+models['rnnt-small'] = "nvidia/parakeet-rnnt-0.6b"
 
-asr_model = nemo_asr.models.ASRModel.from_pretrained(models["ctc"])
+asr_model = nemo_asr.models.ASRModel.from_pretrained(models["rnnt-small"])
 
 decoding_cfg = asr_model.cfg.decoding
 with open_dict(decoding_cfg):
