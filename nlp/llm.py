@@ -2,8 +2,6 @@
 # pip install flash_attn
 
 # Load model directly
-from transformers import AutoModelForCausalLM
-
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
