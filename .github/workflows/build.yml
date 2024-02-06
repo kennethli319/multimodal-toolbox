@@ -94,5 +94,4 @@ jobs:
         with:
           context: "{{defaultContext}}:dockers/llm"
           push: true
-          tags: innerspeech/llm:latest
           tags: innerspeech/llm:${{ github.sha }}
