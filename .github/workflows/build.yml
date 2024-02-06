@@ -29,8 +29,8 @@ jobs:
           context: "{{defaultContext}}:dockers/web"
           push: true
           tags: |
-          innerspeech/web:latest
-          innerspeech/web:${{ github.sha }}
+          	innerspeech/web:latest
+          	innerspeech/web:${{ github.sha }}
   docker-build-tts:
     runs-on: ubuntu-latest
     steps:
@@ -53,8 +53,8 @@ jobs:
           context: "{{defaultContext}}:dockers/tts"
           push: true
           tags: |
-          innerspeech/tts:latest
-          innerspeech/tts:${{ github.sha }}
+          	innerspeech/tts:latest
+          	innerspeech/tts:${{ github.sha }}
   docker-build-asr:
     runs-on: ubuntu-latest
     steps:
@@ -77,8 +77,8 @@ jobs:
           context: "{{defaultContext}}:dockers/asr"
           push: true
           tags: |
-          innerspeech/asr:latest
-          innerspeech/asr:${{ github.sha }}
+          	innerspeech/asr:latest
+          	innerspeech/asr:${{ github.sha }}
   docker-build-llm:
     runs-on: ubuntu-latest
     steps:
@@ -101,5 +101,5 @@ jobs:
           context: "{{defaultContext}}:dockers/llm"
           push: true
           tags: |
-          innerspeech/llm:latest
-          innerspeech/llm:${{ github.sha }}
+          	innerspeech/llm:latest
+          	innerspeech/llm:${{ github.sha }}
