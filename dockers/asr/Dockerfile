@@ -1,5 +1,5 @@
 # Use the official Python 3.10 image as the base image
-FROM ghcr.io/coqui-ai/tts
+FROM nvcr.io/nvidia/nemo:23.10
 
 # Set the working directory inside the container
 WORKDIR /app
