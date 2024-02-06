@@ -30,7 +30,6 @@ jobs:
           push: true
           tags: innerspeech/web:latest
   docker-build-tts:
-    needs: docker-auth
     runs-on: ubuntu-latest
     steps:
       -
