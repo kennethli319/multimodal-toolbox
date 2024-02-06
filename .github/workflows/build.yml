@@ -76,6 +76,15 @@ jobs:
   docker-build-llm:
     runs-on: ubuntu-latest
     steps:
+      - name: Variables set up
+        shell: bash
+        run: |
+          echo "sha_short=$(git rev-parse --short "$GITHUB_SHA")" >> "$GITHUB_ENV"
+          echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >> "$GITHUB_ENV"
+      - name: Show env
+        run: |
+          echo "Branch: ${{ env.branch }}"
+          echo "Sha: ${{ env.sha_short }}"
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -94,4 +103,4 @@ jobs:
         with:
           context: "{{defaultContext}}:dockers/llm"
           push: true
-          tags: innerspeech/llm:latest
+          tags: innerspeech/llm:"${{ env.branch }}.${{ env.sha_short }}"
