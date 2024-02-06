@@ -73,7 +73,7 @@ jobs:
           context: "{{defaultContext}}:dockers/asr"
           push: true
           tags: innerspeech/asr:latest
-docker-build-llm:
+  docker-build-llm:
     runs-on: ubuntu-latest
     steps:
       -
