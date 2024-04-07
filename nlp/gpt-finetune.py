@@ -1,15 +1,11 @@
-import transformers
-
-print(transformers.__version__)
-
 from datasets import load_dataset
+from transformers import AutoTokenizer
+
 datasets = load_dataset('wikitext', 'wikitext-2-raw-v1')
 
 print("Sample", datasets["train"][10])
 
-model_checkpoint = "distilgpt2"
-
-from transformers import AutoTokenizer
+model_checkpoint = "facebook/opt-6.7b"
     
 tokenizer = AutoTokenizer.from_pretrained(model_checkpoint, use_fast=True)
 
@@ -50,13 +46,30 @@ lm_datasets = tokenized_datasets.map(
 
 from transformers import Trainer, TrainingArguments
 from transformers import AutoModelForCausalLM
-model = AutoModelForCausalLM.from_pretrained(model_checkpoint)
+
+from peft import get_peft_model, LoraConfig, TaskType, prepare_model_for_int8_training 
+
+peft_config = LoraConfig(
+    task_type=TaskType.CAUSAL_LM,
+    inference_mode=False, r=4, 
+    lora_alpha=32, lora_dropout=0.1
+)
+
+model = AutoModelForCausalLM.from_pretrained(model_checkpoint,
+                                             load_in_8bit=True, )
+model = get_peft_model(model, peft_config)
+
+model = prepare_model_for_int8_training(model)
+
+model.print_trainable_parameters()
+
+# model = AutoModelForCausalLM.from_pretrained(model_checkpoint)
 
 model_name = model_checkpoint.split("/")[-1]
 training_args = TrainingArguments(
     f"{model_name}-finetuned-wikitext2",
     evaluation_strategy = "epoch",
-    learning_rate=2e-5,
+    learning_rate=2e-4,
     weight_decay=0.01,
     push_to_hub=True,
 )
